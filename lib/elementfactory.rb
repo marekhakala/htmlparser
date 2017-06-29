@@ -23,49 +23,49 @@
 
 require 'singleton'
 
-require_relative 'elements/b'
-require_relative 'elements/basebody'
-require_relative 'elements/body'
-require_relative 'elements/br'
-require_relative 'elements/doctype'
-require_relative 'elements/h'
-require_relative 'elements/h1'
-require_relative 'elements/h2'
-require_relative 'elements/h3'
-require_relative 'elements/h4'
-require_relative 'elements/h5'
-require_relative 'elements/h6'
-require_relative 'elements/head'
-require_relative 'elements/html'
-require_relative 'elements/i'
-require_relative 'elements/table' 
-require_relative 'elements/td'
-require_relative 'elements/th'
-require_relative 'elements/title'
-require_relative 'elements/tr'
-require_relative 'elements/u'
+require './lib/elements/b'
+require './lib/elements/basebody'
+require './lib/elements/body'
+require './lib/elements/br'
+require './lib/elements/doctype'
+require './lib/elements/h'
+require './lib/elements/h1'
+require './lib/elements/h2'
+require './lib/elements/h3'
+require './lib/elements/h4'
+require './lib/elements/h5'
+require './lib/elements/h6'
+require './lib/elements/head'
+require './lib/elements/html'
+require './lib/elements/i'
+require './lib/elements/table'
+require './lib/elements/td'
+require './lib/elements/th'
+require './lib/elements/title'
+require './lib/elements/tr'
+require './lib/elements/u'
 
 class ElementFactory
   include Singleton
-  
+
   def initialize
     defClasses
   end
-  
+
   def findClass name
     unless @classes[name.downcase].nil?
       return @classes[name.downcase]
     end
   end
-  
+
   def createElement(name, input)
      unless @classes[name.downcase].nil?
         return @classes[name.downcase].new(input)
      end
-     
+
      nil
   end
-  
+
   private
   def defClasses
     @classes = {
@@ -88,5 +88,5 @@ class ElementFactory
       "td" => TdElem,
       "tr" => TrElem,
       "th" => ThElem }
-  end 
+  end
 end

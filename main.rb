@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 # ***************************************************************************
 # *   Copyright (C) 2013 by Marek Hakala   *
 # *   hakala.marek@gmail.com   *
@@ -21,8 +22,8 @@
 # *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 # ***************************************************************************/
 
-require_relative 'lib/reader'
-require_relative 'lib/exceptions/invalidtokenexception'
+require File.expand_path('../lib/reader', __FILE__)
+require File.expand_path('../lib/exceptions/invalidtokenexception', __FILE__)
 
 html1 = '<html>
 <head>
@@ -39,13 +40,13 @@ html2 = '<!DOCTYPE html>
                     <title>Welcome page #2</title>
                   </head>
                   <body id="style1" class="sclass1 sclass2" style="background-color: white;">
-                    
+
                     <b>Bold font <b>test (bold font) 1 !</b></b>
                     <i>Italic font test 2</i>
                     <u>Underline font test 3</u>
-                    
+
                     <h1>Headline 1</h1>
-                    
+
                     <table>
                       <tr>
                         <th>Title</th>
@@ -74,13 +75,13 @@ parser = Reader.new(html1)
 begin
   parser.validate
 rescue InvalidTokenException => e
-  puts e 
+  puts e
 rescue InvalidElementException => e
-  puts e 
+  puts e
 rescue InvalidChildrenException => e
-  puts e 
+  puts e
 rescue StandardError => e
-  puts e 
+  puts e
 end
 
 # Test case #2
@@ -89,13 +90,13 @@ parser = Reader.new(html2)
 begin
   parser.validate true
 rescue InvalidTokenException => e
-  puts e 
+  puts e
 rescue InvalidElementException => e
-  puts e 
+  puts e
 rescue InvalidChildrenException => e
-  puts e 
+  puts e
 rescue StandardError => e
-  puts e 
+  puts e
 end
 
 # Test case #3
@@ -104,12 +105,11 @@ parser = Reader.new(html3)
 begin
   parser.validate true
 rescue InvalidTokenException => e
-  puts e 
+  puts e
 rescue InvalidElementException => e
-  puts e 
+  puts e
 rescue InvalidChildrenException => e
-  puts e 
+  puts e
 rescue StandardError => e
-  puts e 
+  puts e
 end
-

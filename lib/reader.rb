@@ -21,13 +21,13 @@
 # *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 # ***************************************************************************/
 
-require_relative 'tokenanalyzer'
-require_relative 'elementfactory'
-require_relative 'elements/doctype'
+require './lib/tokenanalyzer'
+require './lib/elementfactory'
+require './lib/elements/doctype'
 
 class Reader
   attr_accessor :content
-  
+
   def initialize content
     @content = content
   end
@@ -40,7 +40,7 @@ class Reader
 
     # Debug mode
     print @out if debug
-    
+
     # Do HTML validation
     documentValidation
   end
@@ -73,7 +73,7 @@ class Reader
 
   def documentValidation
     bodyValidation
-    
+
     if validState
       puts ":: Document is valid. OK"
     else

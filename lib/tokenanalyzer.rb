@@ -21,30 +21,30 @@
 # *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 # ***************************************************************************/
 
-require_relative 'attrreader'
-require_relative 'htmlelement'
+require './lib/attrreader'
+require './lib/htmlelement'
 
 class TokenAnalyzer
   attr_reader :content, :nodes
-  
+
   def initialize input
     @content = input
     @tokens = ["doctype", "html", "title", "head", "body", "b", "i", "u", "br", "h1", "h2", "h3", "h4", "h5", "h6", "table", "td", "tr", "th"]
   end
-  
+
   def analyzerInit
     @state = :elementBody
-    
+
     @beginElem = ""
     @endElem = ""
     @bodyElem = ""
   end
-  
+
   def analyze
     @nodes = Array.new
-    
+
     analyzerInit
-    
+
     @content.each_char do |character|
       if @state == :elementBody
         analyzeBody character
@@ -56,10 +56,10 @@ class TokenAnalyzer
         analyzeName character
       end
     end
-    
+
     @nodes
   end
-  
+
   def analyzeBody character
     if character == '<'
       @state = :elementBegin
@@ -67,7 +67,7 @@ class TokenAnalyzer
       @bodyElem << character
     end
   end
-  
+
   def analyzeElemBegin character
     if character == '/'
       @beginElem = "/"
@@ -77,31 +77,31 @@ class TokenAnalyzer
       @state = :elementName
     end
   end
-  
+
   def analyzeElemEnd character
     @beginElem << character.upcase
     @state = :elementName
   end
-  
+
   def analyzeName character
     if character == '>'
       if isTokenValid? @beginElem
         if isElemEnd? @beginElem and haveAttr? @beginElem
           fail InvalidTokenException.new("Error: Finding element #{@beginElem} can't have attrs.")
         else
-          @nodes << HTMLElement.new(readElem(@beginElem), readAttr(@beginElem)) 
+          @nodes << HTMLElement.new(readElem(@beginElem), readAttr(@beginElem))
         end
       else
-        fail InvalidTokenException.new("Error: Could not read element #{@beginElem} invalid.")    
+        fail InvalidTokenException.new("Error: Could not read element #{@beginElem} invalid.")
       end
-      
+
       @beginElem = ""
       @state = :elementBody
     else
       @beginElem << character.upcase
     end
   end
-  
+
   protected
   def isTokenValid? input
     inputText = input.downcase.split(' ')[0]
@@ -112,17 +112,17 @@ class TokenAnalyzer
   def isElemEnd? input
     input[0] == '/'
   end
-  
+
   def haveAttr? input
     input.split.size > 1
   end
-  
+
   def readElem input
     input.split(' ', 2)[0]
   end
-  
+
   def readAttr input
     reader = AttrReader.new(input)
     reader.run
-  end  
+  end
 end
