@@ -21,7 +21,7 @@
 # *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 # ***************************************************************************/
 
-require_relative '../exceptions/invalidelementexception'
+require File.expand_path('../../../lib/exceptions/invalidelementexception', __FILE__)
 
 class TableElem < HTMLElement
   def initialize input
@@ -29,7 +29,7 @@ class TableElem < HTMLElement
 
     @validClasses = Array.new [TrElem, ThElem]
     @validAttrs = Array.new ["border", "cellpadding", "cellspacing", "summary"]
-    
+
     fail InvalidElementException.new("Invalid attrs in element #{@elem}.") if not isAttrValid?
   end
 end

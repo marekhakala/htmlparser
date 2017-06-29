@@ -21,17 +21,17 @@
 # *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 # ***************************************************************************/
 
-require_relative '../exceptions/invalidelementexception'
+require File.expand_path('../../../lib/exceptions/invalidelementexception', __FILE__)
 
 class TdElem < HTMLElement
   def initialize input
     super(input.elem, input.attr)
 
     @validAttrs = Array.new ["abbr", "align", "valign"]
-    
-    fail InvalidElementException.new("Invalid attrs in element #{@elem}.") if not isAttrValid? 
+
+    fail InvalidElementException.new("Invalid attrs in element #{@elem}.") if not isAttrValid?
   end
-  
+
   def canHas? input
     false
   end

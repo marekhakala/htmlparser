@@ -21,11 +21,11 @@
 # *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
 # ***************************************************************************/
 
-require_relative 'basebody'
-require_relative '../exceptions/invalidelementexception'
+require File.expand_path('../../../lib/elements/basebody', __FILE__)
+require File.expand_path('../../../lib/exceptions/invalidelementexception', __FILE__)
 
 class BElem < BaseBodyElem
-  
+
   def initialize input
     super(input)
 
