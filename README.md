@@ -1,6 +1,6 @@
 # Basic HTML Parser
 
-This project provide basic HTML parser with support for these html tags <b>, <body>, <br>, <doctype>, <h>, <h1>, <h2>, <h3>, <h4>, <h5>, <h6>, <head>, <html>, <i>, <table>, <td>, <title>, <tr> and <u>. The project also include Rspec unit tests for testing and debugging.
+This project provide basic HTML parser with support for these html tags b, body, br, doctype, h, h1, h2, h3, h4, h5, h6, head, html, i, table, td, title, tr and u. The project also include Rspec unit tests for testing and debugging.
 
 # Run
 * `./main.rb` or `ruby main.rb`
